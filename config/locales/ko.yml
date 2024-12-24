@@ -1,0 +1,7 @@
+ko:
+  timer: "타이머"
+  timer_help: "경과된 시간에 따라 시간 필드가 자동으로 채워집니다."
+  set: "설정"
+  pause: "일시정지"
+  resume: "재개"
+  save: "저장"

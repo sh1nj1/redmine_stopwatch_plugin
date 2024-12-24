@@ -1,0 +1,101 @@
+<% f = form %>
+
+<p>
+  <label style="padding-bottom: 8px;"><%= l(:timer) %></label>
+
+  <span id="countdown" style="align-self: center; font-size: 2rem; font-weight: bold;">00:00:00</span>
+  <br/>
+  <small><%= l(:timer_help) %></small>
+  <br/>
+  <button type="submit" id="pauseBtn" style="align-self: center;"><%= l(:pause) %></button>
+</p>
+
+<script>
+    const updateTime = 1;
+    let totalSeconds = 0;
+    let remainingSeconds = totalSeconds;
+
+    let countdownInterval = null;
+
+    /**
+     * Format a number as a two-digit string, e.g. "07" or "00".
+     */
+    function pad(num) {
+        return num.toString().padStart(2, '0');
+    }
+
+    /**
+     * Update the countdown display in the format "HH:MM:SS".
+     */
+    function updateDisplay(seconds) {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const secs = seconds % 60;
+
+        const formatted = `${pad(hours)}:${pad(minutes)}:${pad(secs)}`;
+        document.getElementById('countdown').textContent = formatted;
+        if (secs === 0) {
+            setTimeEntryHours();
+        }
+    }
+
+    /**
+     * Start or resume the countdown timer.
+     */
+    function startCountdown() {
+        // Clear any existing interval to avoid duplicates
+        clearInterval(countdownInterval);
+
+        countdownInterval = setInterval(() => {
+            if (remainingSeconds > 0 || updateTime > 0) {
+                remainingSeconds += updateTime;
+                updateDisplay(remainingSeconds);
+            } else {
+                // Time's up
+                clearInterval(countdownInterval);
+            }
+        }, 1000);
+    }
+
+    /**
+     * Pause the countdown by clearing the interval.
+     */
+    function pauseCountdown() {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+    }
+
+    function setTimeEntryHours(){
+
+        const currentTime = document.getElementById('countdown').textContent;
+        document.getElementById('time_entry_hours').value = currentTime.substring(0, 5);
+    }
+
+    /**
+     * Handle page visibility changes.
+     * - If the page is hidden, pause the timer.
+     * - If the page is visible again, resume the timer.
+     */
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            pauseCountdown();
+        } else {
+            startCountdown();
+        }
+    });
+
+    document.getElementById('pauseBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        setTimeEntryHours();
+        document.getElementById('pauseBtn').innerText = countdownInterval ? '<%=l(:resume) %>' : '<%=l(:pause) %>'
+        if (countdownInterval) {
+            pauseCountdown();
+        } else {
+            startCountdown();
+        }
+    });
+
+    // Initialize display and start countdown on page load
+    updateDisplay(remainingSeconds);
+    startCountdown();
+</script>

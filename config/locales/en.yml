@@ -1,0 +1,7 @@
+en:
+  timer: "Timer"
+  timer_help: "The Hours field will be auto-populated based on the time elapsed."
+  set: "Set"
+  pause: "Pause"
+  resume: "Resume"
+  save: "Save"

@@ -10,7 +10,11 @@
   <button type="submit" id="pauseBtn" style="align-self: center;"><%= l(:pause) %></button>
 </p>
 
+
+<%= javascript_include_tag('NoSleep.min.js', plugin: :redmine_stopwatch_plugin) %>
 <script>
+    const noSleep = new NoSleep();
+
     const updateTime = 1;
     let totalSeconds = 0;
     let remainingSeconds = totalSeconds;
@@ -98,4 +102,5 @@
     // Initialize display and start countdown on page load
     updateDisplay(remainingSeconds);
     startCountdown();
+    noSleep.enable();
 </script>

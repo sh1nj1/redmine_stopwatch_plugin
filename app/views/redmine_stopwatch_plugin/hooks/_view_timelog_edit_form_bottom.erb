@@ -16,7 +16,7 @@
     const noSleep = new NoSleep();
 
     const updateTime = 1;
-    let totalSeconds = 0;
+    let totalSeconds = <%= @time_entry.hours.nil? ? 0 : @time_entry.hours * 60 * 60 %>;
     let remainingSeconds = totalSeconds;
 
     let countdownInterval = null;

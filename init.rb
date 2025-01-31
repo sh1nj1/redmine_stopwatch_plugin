@@ -9,7 +9,7 @@ Redmine::Plugin.register :redmine_stopwatch_plugin do
   name 'Redmine Stopwatch Plugin'
   author 'soonoh'
   description 'A stopwatch that auto-populates the hours field in the time log screen.'
-  version '0.2.0'
+  version '0.2.1'
   url 'https://github.com/sh1nj1/redmine_stopwatch_plugin'
   author_url ''
 end

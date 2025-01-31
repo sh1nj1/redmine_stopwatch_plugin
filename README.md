@@ -9,7 +9,7 @@ A stopwatch that auto-populates the hours field in the time log screen.
 
 | plugin version | tested redmine version |
 |----------------|------------------------|
-| 0.2.0          | 6.0.2                  |
+| 0.2.1          | 6.0.2                  |
 
 # Install
 

@@ -1,4 +1,4 @@
-module RedmineIncentivePlugin
+module RedmineStopwatchPlugin
 
   class TimelogHooks < Redmine::Hook::ViewListener
 
